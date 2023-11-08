@@ -19,7 +19,7 @@ const client = new EventStoreDBClient(
     nodePreference: "random",
   },
   {
-    rootCertificate: readFileSync("../../certs/ca/ca.crt"),
+    rootCertificate: readFileSync("../certs/ca/ca.crt"),
   },
   {
     username: "admin",

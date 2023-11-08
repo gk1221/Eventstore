@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@eventstore/db-client": "^6.0.0"
+  },
+  "type": "module"
+}

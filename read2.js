@@ -25,7 +25,7 @@ const client = new EventStoreDBClient(
     nodePreference: "random",
   },
   {
-    rootCertificate: readFileSync("../../certs/ca/ca.crt"),
+    rootCertificate: readFileSync("../certs/ca/ca.crt"),
   },
   {
     username: "admin",
@@ -33,9 +33,9 @@ const client = new EventStoreDBClient(
   }
 );
 
-const events = client.readStream("es_supported_clients", {
+const events = client.readStream("some-stream", {
   direction: FORWARDS,
-  fromRevision: BigInt(10),
+  fromRevision: START,
 });
 for await (const resolvedEvent of events) {
   console.log(1);
