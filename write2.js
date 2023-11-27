@@ -4,6 +4,7 @@ import {
   FORWARDS,
   START,
 } from "@eventstore/db-client";
+import { time } from "console";
 import { randomUUID } from "crypto";
 
 import { readFileSync } from "fs";
@@ -27,32 +28,29 @@ const client = new EventStoreDBClient(
   }
 );
 async function simpleTest() {
-  const streamName = "some-stream";
+  const streamName = "account-1";
 
   const event = jsonEvent({
-    type: "grpc-client",
+    type: "myEventType",
     data: {
-      languages: ["typescript", "javascript"],
+      languages: ["typescript", "Python", "JavaScript"],
       runtime: "NodeJS",
-      set: 1,
+      set: 2,
+      identiy: time(),
+      fox: true,
     },
     metadata: {
       resource: "Node.js",
+      log: time(),
     },
   });
 
-  await client.appendToStream(streamName, [event]);
-  await client.appendToStream(streamName, [event]);
+  const appendResult = await client.appendToStream(streamName, event);
 
-  const events = client.readStream(streamName, {
-    fromRevision: START,
-    direction: FORWARDS,
-    maxCount: 10,
-  });
-
-  for await (const event of events) {
-    console.log(event);
-  }
+  if (appendResult.success) console.log("Message sent!");
 }
 
-simpleTest();
+setInterval(() => {
+  simpleTest();
+}, 300);
+

@@ -9,7 +9,16 @@ import { randomUUID } from "crypto";
 
 const client = new EventStoreDBClient(
   {
-    endpoint: "localhost:2113",
+    address: "localhost",
+    port: 2111,
+  },
+  {
+    address: "localhost",
+    port: 2112,
+  },
+  {
+    address: "localhost",
+    port: 2113,
   },
   {
     insecure: true,

@@ -11,15 +11,7 @@ const client = new EventStoreDBClient(
     endpoints: [
       {
         address: "localhost",
-        port: 2111,
-      },
-      {
-        address: "localhost",
         port: 2112,
-      },
-      {
-        address: "localhost",
-        port: 2113,
       },
     ],
     nodePreference: "random",
